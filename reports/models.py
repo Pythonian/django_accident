@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 
 class TypeOfRoad(models.Model):
@@ -38,6 +39,7 @@ class Report(models.Model):
     time_of_accident = models.TimeField()
     is_fatal = models.BooleanField()
     image = models.ImageField(upload_to='reports')
+    video = models.FileField(upload_to='videos', blank=True, null=True)
     accident_type = models.ForeignKey(AccidentType, on_delete=models.CASCADE)
     witness_involvement = models.BooleanField('Were you involved?')
     status = models.CharField(max_length=1, choices=STATUS_CHOICES, default=SUBMITTED)
@@ -53,4 +55,7 @@ class Report(models.Model):
 
     def __str__(self):
         return f'Accident report by {self.witness_name} on {self.date_of_accident}'
+
+    def get_absolute_url(self):
+        return reverse('report', kwargs={'id': self.id})
     

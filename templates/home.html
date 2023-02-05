@@ -51,7 +51,10 @@
                     <div class="row">
                         <div class="col-4">{{ form.is_fatal|as_crispy_field }}</div>
                         <div class="col-4">{{ form.witness_involvement|as_crispy_field }}</div>
-                        <div class="col-4">{{ form.image|as_crispy_field }}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">{{ form.image|as_crispy_field }}</div>
+                        <div class="col-6">{{ form.video|as_crispy_field }}</div>
                     </div>
                     <div class="row">
                         <div class="col-4">{{ form.number_of_vehicles_involved|as_crispy_field }}</div>

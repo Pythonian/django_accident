@@ -1,0 +1,146 @@
+{% extends "base.html" %}
+
+{% block title %}Accident witness report{% endblock %}
+
+{% block content %}
+
+<header class="bg-dark py-5">
+    <div class="container">
+        <div class="row gx-5 align-items-center justify-content-center">
+            <div class="col-lg-6">
+                <div class="my-4">
+                    <h1 class="display-6 fw-bolder text-white mb-2">The witness report of accident</h1>
+                    <p class="lead fw-normal text-white-50 mb-4">Submitted by: {{ report.witness_name }}, on this day: {{ report.date_of_accident|date:"F j Y" }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<section class="bg-white text-dark py-lg-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <p>{{ report.cause_of_accident }}</p>
+                <div class="card p-4 mb-5">
+                    <div class="mb-3">
+                        <img src="{% if report.image %}{{ report.image.url }}{% else %}{% endif %}" alt="{{ report.name }}" class="img-fluid">
+                    </div>
+
+                    <div class="row g-2">
+                        <div class="col-lg-3">
+                            <div class="border p-3">
+                                <p class="text-muted mb-0">Fatality?</p>
+                                <p class="fw-bold text-danger mb-0">
+                                    {% if report.is_fatal %}Yes{% else %}None{% endif %}</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="border p-3">
+                                <p class="text-muted mb-0">Status</p>
+                                <p class="fw-bold mb-0">{{ report.get_status_display }}</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="border p-3">
+                                <p class="text-muted mb-0">Road type</p>
+                                <p class="fw-bold mb-0">{{ report.type_of_road }}</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="border p-3">
+                                <p class="text-muted mb-0">Location</p>
+                                <p class="fw-bold mb-0">{{ report.location }} state</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <h6 class="fw-bold mb-3">Description:</h6>
+                {{ report.description|linebreaks|safe }}
+
+                {% if report.video %}
+                <div class="section d-flex justify-content-center ratio ratio-16x9">
+                    <video controls>
+                        <source src="{{ report.video.url }}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                {% endif %}
+            </div>
+            
+            <div class="col-lg-4">
+                <div class="card border-start-0 border-end-0 border-bottom-0 shadow border-top-primary">
+            
+                    <div class="p-4">
+                        <h6 class="fw-bold mb-3">Report Information</h6>
+                        <div class="d-flex align-items-center mt-4">
+                            <div class="flex-shrink-0">
+                                <i class="fa-solid fa-user text-primary"></i>
+                            </div>
+                            <div class="ms-3">
+                                <h6 class="mb-1 text-muted">Witness name</h6>
+                                <p class="mb-0">{{ report.witness_name }}</p>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center mt-4">
+                            <div class="flex-shrink-0">
+                                <i class="fa-solid fa-calendar text-primary"></i>
+                            </div>
+                            <div class="ms-3">
+                                <h6 class="mb-1 text-muted">Date</h6>
+                                <p class="mb-0">{{ report.date_of_accident }}</p>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center mt-4">
+                            <div class="flex-shrink-0">
+                                <i class="fa-solid fa-clock-rotate-left text-primary"></i>
+                            </div>
+                            <div class="ms-3">
+                                <h6 class="mb-1 text-muted">Time</h6>
+                                <p class="mb-0">{{ report.time_of_accident }}</p>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center mt-4">
+                            <div class="flex-shrink-0">
+                                <i class="fa-solid fa-road-barrier text-primary"></i>
+                            </div>
+                            <div class="ms-3">
+                                <h6 class="mb-1 text-muted">Accident type</h6>
+                                <p class="mb-0">{{ report.accident_type }}</p>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center mt-4">
+                            <div class="flex-shrink-0">
+                                <i class="fa-solid fa-car text-primary"></i>
+                            </div>
+                            <div class="ms-3">
+                                <h6 class="mb-1 text-muted">Vehicles Involved</h6>
+                                <p class="mb-0">{{ report.number_of_vehicles_involved }}</p>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center mt-4">
+                            <div class="flex-shrink-0">
+                                <i class="fa-solid fa-user-injured text-primary"></i>
+                            </div>
+                            <div class="ms-3">
+                                <h6 class="mb-1 text-muted">Number of injuries</h6>
+                                <p class="mb-0">{{ report.number_of_injured_victims }}</p>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center mt-4">
+                            <div class="flex-shrink-0">
+                                <i class="fa-solid fa-skull text-primary"></i>
+                            </div>
+                            <div class="ms-3">
+                                <h6 class="mb-1 text-muted">Number of deaths</h6>
+                                <p class="mb-0">{{ report.number_of_deaths }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

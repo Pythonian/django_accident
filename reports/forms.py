@@ -14,5 +14,5 @@ class ReportForm(forms.ModelForm):
 
     class Meta:
         model = Report
-        fields = ['witness_name', 'witness_email', 'witness_phonenumber', 'date_of_accident', 'time_of_accident', 'accident_type', 'is_fatal', 'image', 'witness_involvement', 'number_of_vehicles_involved', 'number_of_injured_victims', 'cause_of_accident', 'number_of_deaths', 'location', 'type_of_road', 'description']
+        fields = ['witness_name', 'witness_email', 'witness_phonenumber', 'date_of_accident', 'time_of_accident', 'accident_type', 'is_fatal', 'image', 'video', 'witness_involvement', 'number_of_vehicles_involved', 'number_of_injured_victims', 'cause_of_accident', 'number_of_deaths', 'location', 'type_of_road', 'description']
 
